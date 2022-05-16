@@ -9,4 +9,11 @@ class UserInformation extends Model
 {
     use HasFactory;
     protected $table = 'user_information';
+    public $timestamps = false;
+    protected $fillable = [
+        'name',
+        'userId',
+        'email',
+        'surname',
+    ];
 }

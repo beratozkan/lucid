@@ -13,6 +13,9 @@ $(function () {
         else if (type === 'confirm') {
             showConfirmMessage(e);
         }
+        else if(type== 'test'){
+            testMessage();
+        }
         else if (type === 'cancel') {
             showCancelMessage();
         }
@@ -46,21 +49,39 @@ function showWithTitleMessage() {
 function showSuccessMessage() {
     swal("Good job!", "You clicked the button!", "success");
 }
-
-function showConfirmMessage(id) {
+function testMessage(){
+    
     swal({
         title: "Are you sure?",
-        text: "You will not be able to recover this imaginary file!",
+      text: "You will not be able to recover this imaginary file!",
+      icon: "warning",
+    
+      buttons: [
+        'No, cancel it!',
+        'Yes, I am sure!'
+      ],
+      dangerMode: true,
+})}
+function showConfirmMessage(id) {
+    swal({
+        
+        
+        title: "Are you sure?",
+        text: "You will not be able to recov111er this imaginary file!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#dc3545",
         confirmButtonText: "Yes, delete it!",
-        closeOnConfirm: false
+        closeOnConfirm: false,
+        attributes:{
+            test:"test",
+        },
     }, function () {
+        
         var userid = id.target.parentNode.parentElement.firstElementChild.value;
         console.log(userid);
         
-        $.ajax({
+       /* $.ajax({
             type: "get",
             url: "employe-delete/"+userid,
             data: { 'id': userid},
@@ -79,7 +100,7 @@ function showConfirmMessage(id) {
                 "error"
                 )
             }
-        });
+        });*/
         swal("Deleted!", "Your imaginary file has been deleted.", "success");
     });
 }
@@ -87,12 +108,12 @@ function showConfirmMessage(id) {
 function showCancelMessage() {
     swal({
         title: "Are you sure?",
-        text: "You will not be able to1111s recover this imaginary file!",
+        text: "You will not be able tos recover this imaginary file!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#dc3545",
         confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel plx!",
+        cancelButtonText: "No, cancel plx! class='fsfs'",
         closeOnConfirm: false,
         closeOnCancel: false
     }, function (isConfirm) {

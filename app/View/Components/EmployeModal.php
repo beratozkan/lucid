@@ -26,8 +26,14 @@ class EmployeModal extends Component
     {
         $employe = employes::where("boss",Auth::user()["id"])->get();
         $male = $employe->where("gender","M")->count();
-        $female = $employe->where("gender","F")->count(); 
-        $male_count = 100/(($male +$female)/$male);
+        $female = $employe->where("gender","F")->count();
+        if($male == 0){
+            $male_count = 0;
+        }
+        else{
+            $male_count = 100/(($male +($female ? $female:$female=1))/($male ? $male:$male=1));
+
+        }
         return view('components.employe-modal',["employes"=>$employe,"male"=>$male_count]);
     }
 }

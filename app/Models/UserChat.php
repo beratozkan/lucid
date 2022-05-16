@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NavBarBlockHeader extends Model
+class UserChat extends Model
 {
-    protected $table = "UserDashboard";
     use HasFactory;
-    protected $fillable = [
-        
-        'userId',
-       
-    ];
+    protected $fillable = ['user_to',"user_from","content"];
+    
 }

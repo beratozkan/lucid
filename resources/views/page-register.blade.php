@@ -49,7 +49,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>
                                 <div class="bottom">
-                                    <span class="helper-text">Already have an account? <a href="page-login.html">Login</a></span>
+                                    <span class="helper-text">Already have an account? <a href="/">Login</a></span>
                                 </div>
                             </form>
                             <div class="separator-linethrough"><span>OR</span></div>

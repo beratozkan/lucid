@@ -55,7 +55,7 @@
                                 <li><a href="employe-all">All Employees</a></li>
                                 <li><a href="emp-leave.html">Leave Requests</a></li>
                                 <li><a href="emp-attendance.html">Attendance</a></li>
-                                <li><a href="emp-departments.html">Departments</a></li>
+                                <li><a href="emp-departments">Departments</a></li>
                             </ul>
                         </li>
                         <li>

@@ -24,6 +24,7 @@
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="assets/css/main.css">
 <link rel="stylesheet" href="assets/css/color_skins.css">
+@livewireStyles
 </head>
 <body class="theme-orange">
 
@@ -78,5 +79,7 @@
 
 <script src="assets/bundles/mainscripts.bundle.js"></script>
 <script src="assets/js/index.js"></script>
+@livewireScripts
+
 </body>
 </html>

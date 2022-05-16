@@ -51,7 +51,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                                 <div class="bottom">
-                                    <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
+                                    <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password">Forgot password?</a></span>
                                     <span>Don't have an account? <a href="page-register">Register</a></span>
                                 </div>
                             </form>

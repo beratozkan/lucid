@@ -7,7 +7,7 @@ use App\Models\employes;
 use Auth;
 class EmployeController extends Controller
 {
-    public $id1 = "bış";
+    
    public function PermControl($empId){
        if($empId != Auth::user()["id"]){
            return false;
@@ -16,7 +16,7 @@ class EmployeController extends Controller
    }
     public function index($page=1){
         $employes = $this->ShowEmploye($page);
-        return view("employe-all",["employes"=>$employes,"id1"=>$this->id1]);
+        return view("employe-all",["employes"=>$employes]);
     }
 
     public function AddNewEmploye(Request $req){
