@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
-use App\Models\User;
+use App\Models\UserInformation;
 use Auth;
 class constants extends ServiceProvider
 {
@@ -16,7 +16,7 @@ class constants extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
     /**
@@ -27,7 +27,8 @@ class constants extends ServiceProvider
     public function boot()
     {
         view()->composer('LeftSideBar', function ($view) {
-            $view->with('user', Auth::user());
+            $side_bar_info = UserInformation::where("userId",Auth::user()["id"])->first();
+            $view->with('user', $side_bar_info);
         });
     }
 }

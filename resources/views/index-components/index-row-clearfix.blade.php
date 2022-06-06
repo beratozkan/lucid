@@ -5,7 +5,7 @@
                 <div class="icon"><i class="fa fa-user"></i> </div>
                 <div class="content">
                     <div class="text">New Employee</div>
-                    <h5 class="number">22</h5>
+                    <h5 class="number">22334</h5>
                 </div>
                 <hr>
                 <div class="icon"><i class="fa fa-users"></i> </div>

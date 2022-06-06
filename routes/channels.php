@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,17 @@ use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('channel', function (User $user,$message) {
+    //$user = User::find($user_id);
+    
+    return $user;
+});
+Broadcast::channel('users', function ($user) {
+    if(Auth::check()){
+        return "fsfs";
+    }
+    
+    
 });

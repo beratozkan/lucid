@@ -16,6 +16,8 @@
                         <div class="col-md-6">
                             <div class="form-group">                                    
                                 <input type="text" class="form-control" placeholder="Departments Head" wire:model.defer="departman_head">
+                                  @error('error_message') <span class="error">{{ $error_message }}</span> @enderror
+
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -26,7 +28,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-primary"  wire:click="AddDepartment">Add</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
                 </div>
             </div>

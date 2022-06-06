@@ -7,6 +7,7 @@
                
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong> {{$user->name}}</strong></a>                    
                 <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
+                    
                     <li><a href="user-profile"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
@@ -18,15 +19,15 @@
             <hr>
             <div class="row">
                 <div class="col-4">
-                    <h6>5+</h6>
+                    <h6>{{$user->experience}}</h6>
                     <small>Experience</small>                        
                 </div>
                 <div class="col-4">
-                    <h6>400+</h6>
+                    <h6>{{$user->employe_count}}</h6>
                     <small>Employees</small>                        
                 </div>
                 <div class="col-4">                        
-                    <h6>80+</h6>
+                    <h6>{{$user->client_count}}</h6>
                     <small>Clients</small>
                 </div>
             </div>
@@ -102,7 +103,7 @@
                     <ul class="main-menu metismenu">
                         <li><a href="index2.html"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>
                         <li><a href="app-inbox.html"><i class="icon-envelope"></i>Inbox App</a></li>
-                        <li><a href="app-chat.html"><i class="icon-bubbles"></i>Chat App</a></li>
+                        <li><a href="app-chat"><i class="icon-bubbles"></i>Chat App</a></li>
                         <li>
                             <a href="#Projects" class="has-arrow"><i class="icon-list"></i><span>Projects</span></a>
                             <ul>
@@ -115,9 +116,9 @@
                         <li>
                             <a href="#Clients" class="has-arrow"><i class="icon-user"></i><span>Clients</span></a>
                             <ul>
-                                <li><a href="client-add.html">Add Clients</a></li>
-                                <li><a href="client-list.html">Clients List</a></li>
-                                <li><a href="client-detail.html">Clients Detail</a></li>
+                                <li><a href="client-add">Add Clients</a></li>
+                                <li><a href="client-list">Clients List</a></li>
+                                <li><a href="client-detail">Clients Detail</a></li>
                             </ul>
                         </li>
                         <li><a href="project-team.html"><i class="icon-users"></i>Team</a></li>

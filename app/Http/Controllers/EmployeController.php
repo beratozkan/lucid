@@ -21,6 +21,7 @@ class EmployeController extends Controller
 
     public function AddNewEmploye(Request $req){
         employes::create(["boss"=>Auth::user()["id"],"name"=>$req->e_name,"job"=>$req->e_role,"phoneNumber"=>$req->phone_number,"email"=>$req->email,"gender"=>$req->gender3]);
+        
         return redirect("employe-all");
     }
     public function ShowEmploye($page){

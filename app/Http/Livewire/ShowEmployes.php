@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 use App\Models\employes;
 use Livewire\WithPagination;
 use Livewire\Component;
+use App\Models\UserInformation;
 use Auth;
 
 class ShowEmployes extends Component
@@ -24,9 +25,14 @@ class ShowEmployes extends Component
         
         $emp = employes::find($id);
         if($emp){
+                
+            $emp->delete();
+            $user = UserInformation::where("userId",Auth::user()["id"])->first();
+            if($user->employe_count>0){
+                $user->employe_count -=1;
+            } 
             
-            $emp->delete();  
-            
+            $user->save();
             
         }
         

@@ -2,30 +2,42 @@
 
 namespace App\Http\Livewire;
 use App\Models\ChatClients;
+use App\Models\UserChat;
 use App\Models\UserInformation;
 use Livewire\Component;
+use App\Events\socket1;
+
 use Auth;
 class ChatClientController extends Component
 {   
     public $userinfo;
+    public $user_messages = [];
+    public $message;
+    public $chat;
    
+
     public function render()
     {
         
-        return view('livewire.chat-client-controller',["clients"=>$this->GetChatLists()]);
+        $user = $this->GetUserInfo($this->chat->user_to);
+        return view('livewire.chat-client-controller',["user"=>$user]);
+    }  
+    public function showMessages(){
+       //dd($id);
+        $this->emit("UserMessage");
     }
-    public function showMessages($id){
+
+    public function GetUserMessages(){
         
-        $this->emit("UserMessage",["id"=>$id]);
+        $this->emit("UserMessage",["id"=>$this->chat->user_to]);
+        
+        
+        
     }
     public function GetUserInfo($id){
-        $this->userinfo =  UserInformation::where("id",$id)->first();
+        return UserInformation::where("userId",$id)->first();
     }
-    public function GetChatLists(){
-        $chats = ChatClients::where("user_from",Auth::user()["id"])->get();
-          //  $chats = ChatClients::all();
-        //$this->emit("UserMessage",["id"=>$chats[0]->user_to]);
-        return $chats;
-        
-    }
+  
+  
+   
 }

@@ -9,6 +9,16 @@
 <script src="assets/js/pages/tables/jquery-datatable.js"></script>
 <script src="assets/bundles/datatablescripts.bundle.js"></script>
 <script src="../assets/vendor/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js --> 
+<script>
+     $(document).ready(function () {
+          $("#add_employe").click(function(e){
+              
+               $('.modal-backdrop').remove();
+          })
+         
+     });
+     
+</script>
 
 @endsection
 @section("section1")
@@ -19,10 +29,9 @@
                               
                              
                          
-     <script>
-          document.getElementById("add_employe");
-     </script>
+
                         
 @endsection
+
 <script>
 

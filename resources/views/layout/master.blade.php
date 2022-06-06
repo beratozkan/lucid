@@ -8,11 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="description" content="Lucid Bootstrap 4x Admin Template">
 <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-<!-- VENDOR CSS -->
+<!-- VENDOR CSS --> 
 @yield('css')
 <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -79,6 +82,7 @@
 
 <script src="assets/bundles/mainscripts.bundle.js"></script>
 <script src="assets/js/index.js"></script>
+
 @livewireScripts
 
 </body>

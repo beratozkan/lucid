@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\ChatClients;
 use App\Models\UserInformation;
 use App\Models\employes;
 use App\Models\NavBarBlockHeader;
 use Illuminate\Support\Str;
-
+use App\Jobs\Mailqueue;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -38,15 +39,19 @@ class UserActions extends Controller
     }
 }
 public function UserChat(){
+  $chats = ChatClients::where("user_from",Auth::user()["id"])->get();
+  return view("app-chat",["chats"=>$chats]);
+}
+public function ClientAdd(){
 
-  return view("app-chat");
+  return view("add-client");
 }
 public function RegisterToApp(Request $req){
   $validated = $req->validate(["name"=>"required","email"=>"required","password"=>"required"]);
 
   $user = User::create(["name"=>$req->name,"email"=>$req->email,"password"=>bcrypt($req->password)]);
   $user= $user->fresh();
-  UserInformation::create(["name"=>$req->name,"userId"=>$user->id]);
+  UserInformation::create(["name"=>$req->name,"userId"=>$user->id,"email"=>$req->email]);
   NavBarBlockHeader::create(["userId"=>$user->id]);
   
   return redirect("/");
@@ -57,7 +62,13 @@ public function UserProfile(){
 
  });
   
-  return view("page-profile2",["userinfo"=>$info,"count"=>2]);
+  return view("page-profile2",["userinfo"=>$info]);
+}
+public function pusherAuth(Request $req){
+  $string = $req->socket_id.":".$req->channel_name;
+  $secret = "4f1a031a0ee8d4666897";
+  $last  =hash_hmac("sha256",$string,$secret);
+  return response()->json(["auth"=>"fbf2aca016a814d58384:".$last,"user_info"=>"{\"id\":\"12345\"}"]);
 }
 public function LogoutFromApp(){
   Auth::logout();
@@ -68,6 +79,9 @@ public function UpdateUserInfo(){
 }
 public function PasswordReset(){
   return view("forget-password");
+}
+public function EmpDepartments(){
+  return view("emp-department");
 }
 public function PasswordResetMail(Request $req){
   
@@ -83,7 +97,9 @@ public function PasswordResetMail(Request $req){
     'title' => 'şifre sıfırlama',
     'url' => "http://127.0.0.1:8000/password_reset?email=".$req->email."&token=".$r_token,
 ];
-Mail::to($req->email)->send(new PasswordReset($mailInfo));
+//$details = ['email' => 'recipient@example.com'];
+dispatch(new Mailqueue(["email"=>$req->email,"mailInfo"=>$mailInfo]));
+//Mail::to($req->email)->send(new PasswordReset($mailInfo));
 return redirect("/");
 }
 public function PasswordResetUser(Request  $req){

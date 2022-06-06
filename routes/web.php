@@ -19,6 +19,9 @@ use App\Http\Livewire\EmpDepartman;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get("sockettest",function(){
+    return view("test-websocket");
+});
 Route::get("/password_reset",function(Request $request){
     return view("password-reset",["email"=>$request->email]);
     //return response()->json([$request->email]);
@@ -26,6 +29,7 @@ Route::get("/password_reset",function(Request $request){
 Route::get('/', function () {
     return redirect("loginpage");
 })->middleware("AuthCheck");
+
 Route::post("/login",[UserActions::class,"LoginToApp"]);
 Route::get("/index",[UserActions::class,"render"])->middleware("AuthCheck");
 
@@ -45,11 +49,13 @@ Route::get("/test2",function(){
 Route::get("/test",function(){
     return view("test");
 });
+Route::get("client-add",[UserActions::class,"ClientAdd"]);
+Route::post("pusher/auth",[UserActions::class,"pusherAuth"]);
 Route::post("change-password",[UserActions::class,"PasswordResetUser"]);
 Route::post("/password-reset-mail",[UserActions::class,"PasswordResetMail"]);
 Route::get("page-forgot-password",[UserActions::class,"PasswordReset"]);
-Route::get("/emp-departments",[EmpDepartman::class,"render"]);
-Route::get("/app-chat",[UserActions::class,"UserChat"]);
+Route::get("/emp-departments",[UserActions::class,"EmpDepartments"]);
+Route::get("/app-chat",[UserActions::class,"UserChat"])->middleware("AuthCheck");
 Route::get('/employe-all', [EmployeController::class,"index"]);
 Route::get('/employe-leave', [EmployeController::class,"index"]);
 //Route::post("/employe-add",[EmployeController::class,"AddNewEmploye"]);
