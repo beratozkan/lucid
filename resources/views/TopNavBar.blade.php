@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-btn">
@@ -27,21 +28,8 @@
                         </a>
                         <ul class="dropdown-menu notifications animated shake">
                             <li class="header"><strong>You have 4 new Notifications</strong></li>
-                            @foreach($notification as $not)
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <i class="icon-info text-{{$not['status']}}"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <p class="text">{{$not["content"]}}</p>
-                                            <span class="timestamp">{{$not["created_at"]}}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>   
-                            @endforeach                            
+                           
+                                                      
                             <li>
                                 <a href="javascript:void(0);">
                                     <div class="media">

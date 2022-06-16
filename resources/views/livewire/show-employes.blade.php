@@ -1,4 +1,6 @@
 
+
+
 <div class="row clearfix">
     
 
@@ -31,8 +33,10 @@
                 </tr>
             </thead>
 <tbody>
+@if(count($employes)>0)
 @foreach ($employes as $employe)
 <tr>
+    
     <td class="width45">
     <label class="fancy-checkbox">
             <input class="checkbox-tick" type="checkbox" name="checkbox">
@@ -55,11 +59,12 @@
 </tr>
   
 @endforeach
+@endif
 </tbody>
 </table>
 </div>
 </div>
 </div>
 </div>
-{{ $employes->links() }}
+
 </div>

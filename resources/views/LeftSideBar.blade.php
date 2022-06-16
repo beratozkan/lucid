@@ -5,7 +5,7 @@
             <div class="dropdown">
                 <span>Welcome,</span>
                
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong> {{$user->name}}</strong></a>                    
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong> {{$user["name"]}}</strong></a>                    
                 <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
                     
                     <li><a href="user-profile"><i class="icon-user"></i>My Profile</a></li>
@@ -19,15 +19,15 @@
             <hr>
             <div class="row">
                 <div class="col-4">
-                    <h6>{{$user->experience}}</h6>
+                    <h6>{{$user["experience"]}}</h6>
                     <small>Experience</small>                        
                 </div>
                 <div class="col-4">
-                    <h6>{{$user->employe_count}}</h6>
+                    <h6>{{$user["employe_count"]}}</h6>
                     <small>Employees</small>                        
                 </div>
                 <div class="col-4">                        
-                    <h6>{{$user->client_count}}</h6>
+                    <h6>{{$user["client_count"]}}</h6>
                     <small>Clients</small>
                 </div>
             </div>

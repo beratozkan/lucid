@@ -8,6 +8,9 @@ use App\Models\employes;
 use App\Models\NavBarBlockHeader;
 use Illuminate\Support\Str;
 use App\Jobs\Mailqueue;
+use Illuminate\Support\Facades\Cookie;
+
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -19,70 +22,50 @@ class UserActions extends Controller
 {
   public $user;
   public function render(){
-    $this->user = Auth::user();
+    //$this->user = Auth::user();
    
-    //$employeCount = count($employes);
+    $this->user = $this->HttpGet("user");
     return view("index");
   }
-  
+
+  public function HttpGet($path){
+     $response = Http::withToken(Cookie::get("access_token"))->get("http://127.0.0.1:8001/api/".$path);
+     if($response->status() !=200){
+      return false;
+     }
+     return $response->body();
+
+  }
+  public function HttpPost($path){
+    Http::withToken(Cookie::get("access_token"))->post("http://127.0.0.1:8001/api/".$path);
+  }
   public function LoginToApp(Request $req){
-      
-    $user = $req->all();
-    
-    if(Auth::attempt($user)){
-      $this->user = Auth::user();
-      return view("index",["user"=>$this->user]);
-    }
-    else{
-        return redirect("/");
+    $response = Http::post('http://127.0.0.1:8001/api/login', [
+      'email' => $req->email,
+      'password' => $req->password,
+  ]);
+  if($response->status() != 200){
+      return $this->message = "kullanıcı adı veya şifre hatalı";
+  }
+ 
+  $token = $response["access_token"];
+  Cookie::queue("access_token", $token,3600);
+  return redirect("index");
+ 
+}
 
-    }
-}
-public function UserChat(){
-  $chats = ChatClients::where("user_from",Auth::user()["id"])->get();
-  return view("app-chat",["chats"=>$chats]);
-}
-public function ClientAdd(){
-
-  return view("add-client");
-}
-public function RegisterToApp(Request $req){
-  $validated = $req->validate(["name"=>"required","email"=>"required","password"=>"required"]);
-
-  $user = User::create(["name"=>$req->name,"email"=>$req->email,"password"=>bcrypt($req->password)]);
-  $user= $user->fresh();
-  UserInformation::create(["name"=>$req->name,"userId"=>$user->id,"email"=>$req->email]);
-  NavBarBlockHeader::create(["userId"=>$user->id]);
-  
-  return redirect("/");
-}
 public function UserProfile(){
-  $info = UserInformation::findOr(Auth::user()["id"],function(){
+        
+  /*$info = UserInformation::findOr(Auth::user()["id"],function(){
     UserInformation::create(["userId"=>Auth::user()["id"],"name"=> Auth::user()["name"]]);
 
- });
+ });*/
+  $info = HttpGet("user");
   
   return view("page-profile2",["userinfo"=>$info]);
 }
-public function pusherAuth(Request $req){
-  $string = $req->socket_id.":".$req->channel_name;
-  $secret = "4f1a031a0ee8d4666897";
-  $last  =hash_hmac("sha256",$string,$secret);
-  return response()->json(["auth"=>"fbf2aca016a814d58384:".$last,"user_info"=>"{\"id\":\"12345\"}"]);
-}
-public function LogoutFromApp(){
-  Auth::logout();
-  return redirect("/");
-}
-public function UpdateUserInfo(){
-  
-}
-public function PasswordReset(){
-  return view("forget-password");
-}
-public function EmpDepartments(){
-  return view("emp-department");
-}
+
+
 public function PasswordResetMail(Request $req){
   
  $user = User::where("email",$req->email)->first();
@@ -111,6 +94,6 @@ public function PasswordResetUser(Request  $req){
     $user->remember_token = "";
     $user->save();
     return redirect("/");
-}
+} 
 
 }

@@ -18,12 +18,12 @@ class tokenControl
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = user::where("email",$request->email)->first();
+      /*  $user = user::where("email",$request->email)->first();
         if($user && ($request->token == $user->remember_token)){
             //$request->merge(["email" => $user->email]);
             return $next($request);
         }  
         return response()->json("token veya kullanıcı geçersiz");
-        
+     */   
     }
 }

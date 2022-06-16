@@ -3,6 +3,8 @@
         <div class="card">
             <div class="header">
                 <h2>Employee Performance</h2>
+                
+
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -20,11 +22,12 @@
                         <tbody>
                             @foreach($employes as $employe)
                             <tr>
+                               
                                 <td><img src="../assets/images/xs/avatar{{$loop->index+1}}.jpg" class="rounded-circle width35" alt=""></td>
-                                <td>{{$employe->name}}</td>
-                                <td><span>{{$employe->job}}</span></td>
+                                <td>{{$employe["name"]}}</td>
+                                <td><span>{{$employe["job"]}}</span></td>
                                 <td><span class="badge badge-success">Good</span></td>
-                                <td><span class="sparkbar">{{$employe->performance}}</span></td>
+                                <td><span class="sparkbar">{{$employe["performance"]}}</span></td>
                             </tr>
                             @endforeach
                             

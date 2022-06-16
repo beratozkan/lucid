@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cookie;
 
 use Illuminate\Http\Request;
 use App\Models\employes;
@@ -25,7 +27,10 @@ class EmployeController extends Controller
         return redirect("employe-all");
     }
     public function ShowEmploye($page){
-        $employes = employes::where("boss",Auth::user()["id"])->skip(($page-1)*15)->take(15)->get();
+        $employes = Http::withToken(Cookie::get("access_token"))->get("http://127.0.0.1:8001/api/employes",
+    ["page"=>$page]
+    )->body();
+        //$employes = employes::where("boss",Auth::user()["id"])->skip(($page-1)*15)->take(15)->get();
         return $employes;
     }
     public function EditEmploye($id,Request $req){

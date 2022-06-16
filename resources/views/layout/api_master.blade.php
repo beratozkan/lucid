@@ -41,7 +41,7 @@
 <!-- Overlay For Sidebars -->
 <div id="wrapper">
 
-    @include("TopNavBar",["test"=>"test"])
+    @include("TopNavBar")
     
        @include("LeftSideBar")
           

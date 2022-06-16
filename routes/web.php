@@ -30,9 +30,13 @@ Route::get('/', function () {
     return redirect("loginpage");
 })->middleware("AuthCheck");
 
-Route::post("/login",[UserActions::class,"LoginToApp"]);
-Route::get("/index",[UserActions::class,"render"])->middleware("AuthCheck");
+//Route::post("/login",[UserActions::class,"LoginToApp"]);
+Route::get("/index",[UserActions::class,"render"]);
 
+Route::get("/index2",function(){
+
+    return view("test-websocket");
+});
 Route::get('/page-register',function(){
     return view("page-register");
 });
@@ -40,15 +44,14 @@ Route::get('/logout',[UserActions::class,"LogoutFromApp"]);
 Route::get("/loginpage",function(){
     return view("login");
 });
+Route::get("/loginpage2",function(){
+    return view("login2");
+});
 Route::get("/user-profile",[UserActions::class,"UserProfile"])->middleware("AuthCheck");
 Route::post('register',[UserActions::class,"RegisterToApp"]);
 Route::post("update-general");
-Route::get("/test2",function(){
-    return view("test2");
-});
-Route::get("/test",function(){
-    return view("test");
-});
+Route::post("/login",[UserActions::class,"LoginToApp"]);
+
 Route::get("client-add",[UserActions::class,"ClientAdd"]);
 Route::post("pusher/auth",[UserActions::class,"pusherAuth"]);
 Route::post("change-password",[UserActions::class,"PasswordResetUser"]);

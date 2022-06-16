@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section("title","User Profile v2")
 @section("section1")
+
 <div class="row clearfix">
 
     <div class="col-lg-4 col-md-12">

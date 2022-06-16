@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\apiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,9 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::get('/index.php', function() {
-    return view("login");
+
+
+
+Route::group([
+
+    'middleware' => 'api',
+    
+
+], function ($router) {
+    Route::post('login', [apiController::class, 'login']);
+    Route::get("employes",[apiController::class, 'employes']);
+    Route::post('add-employe', [apiController::class, 'AddEmploye']);
+    Route::put('edit-employe', [apiController::class, 'EditEmploye']);
+    Route::delete('delete-employe', [apiController::class, 'DeleteEmploye']);
+    Route::post('create-user', [apiController::class, 'CreateUser']);
+    Route::get('user-profile', [apiController::class, 'UserProfile']);
+    Route::get('row-text-right', [apiController::class, 'RowTextRight']);
+    Route::get('left-side-bar', [apiController::class, 'LeftSideBar']);
+    Route::get('top-nav-bar', [apiController::class, 'TopNavBar']);
+    Route::get('user', [apiController::class, 'user']);
+    Route::get('testreq', [apiController::class, 'testreq']);
+
 });

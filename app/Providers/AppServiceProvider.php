@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -11,6 +12,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected $policies = [
+        'App\Model' => 'App\Policies\ModelPolicy',
+        ];
     public function register()
     {
         //
@@ -23,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //$this->registerPolicies();
+       
+
+
     }
 }

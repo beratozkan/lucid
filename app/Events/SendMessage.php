@@ -36,8 +36,5 @@ class SendMessage implements ShouldBroadcast
     {
         return new PrivateChannel('channel');
     }
-    public function broadcastAs()
-  {
-      return 'SendMessage';
-  }
+   
 }

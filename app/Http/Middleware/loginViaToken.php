@@ -5,8 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Auth;
-use JWTAuth;
-class AuthCheck
+class loginViaToken
 {
     /**
      * Handle an incoming request.
@@ -17,13 +16,10 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
+        Auth::viaRequest('custom-token', function ($request) {
+            return User::where('api_token', $request->token)->first();
+        });
+    
        
-        if (!Auth::check()) {
-            
-            return redirect("/loginpage");
-            //return response()->json($request->all());
-        }
-        
-        return $next($request);
     }
 }

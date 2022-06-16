@@ -44,7 +44,7 @@ class ChatAppCard extends Component
         //dd($this->user_to_id);
         $user = User::find($this->user_to_id);
         $sender_id = Auth::user()["id"];
-        broadcast(new SendMessage($this->message,$user,$sender_id))->toOthers();
+        //broadcast(new SendMessage($this->message,$user,$sender_id))->toOthers();
         //dd($this->sender_user_id);
         $this->emit("UserMessage",["id"=>$this->user_to_id]);
         $this->message = "";

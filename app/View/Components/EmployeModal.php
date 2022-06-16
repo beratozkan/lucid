@@ -4,7 +4,10 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use App\Models\employes;
-use auth;
+use Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cookie;
+
 class EmployeModal extends Component
 {
     /**
@@ -24,9 +27,12 @@ class EmployeModal extends Component
      */
     public function render()
     {
-        $employe = employes::where("boss",Auth::user()["id"])->get();
-        $male = $employe->where("gender","M")->count();
-        $female = $employe->where("gender","F")->count();
+        $employe = Http::withToken(Cookie::get("access_token"))->get("http://127.0.0.1:8001/api/employes");
+        
+        
+        $male = $employe["male"];
+        $female = $employe["female"];
+        $employes = $employe["employes"];
         if($male == 0){
             $male_count = 0;
         }
@@ -34,6 +40,6 @@ class EmployeModal extends Component
             $male_count = 100/(($male +($female ? $female:$female=1))/($male ? $male:$male=1));
 
         }
-        return view('components.employe-modal',["employes"=>$employe,"male"=>$male_count]);
+        return view('components.employe-modal',["employes"=>$employes,"male"=>$male_count]);
     }
 }
