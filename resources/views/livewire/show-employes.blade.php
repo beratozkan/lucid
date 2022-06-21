@@ -33,7 +33,8 @@
                 </tr>
             </thead>
 <tbody>
-@if(count($employes)>0)
+
+@if(!is_null($employes))
 @foreach ($employes as $employe)
 <tr>
     
@@ -66,5 +67,13 @@
 </div>
 </div>
 </div>
-
+<script>
+window.addEventListener('alert', event => { 
+    toastr[event.detail.type](event.detail.message, 
+    event.detail.title ?? ''), toastr.options = {
+           "closeButton": true,
+           "progressBar": true,
+       }
+   });
+</script>
 </div>

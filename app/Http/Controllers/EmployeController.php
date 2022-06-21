@@ -47,7 +47,9 @@ class EmployeController extends Controller
             $emp->delete();
             return redirect("employe-all");
         }
-        
+      
 
     }
+    
+    
 }

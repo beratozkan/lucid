@@ -29,7 +29,10 @@ Route::group([
     Route::get("employes",[apiController::class, 'employes']);
     Route::post('add-employe', [apiController::class, 'AddEmploye']);
     Route::put('edit-employe', [apiController::class, 'EditEmploye']);
-    Route::delete('delete-employe', [apiController::class, 'DeleteEmploye']);
+    Route::get('leave-requests', [apiController::class, 'GetLeaveRequests']);
+    Route::post('add-leave-requests', [apiController::class, 'AddLeaveRequsts']);
+    
+    Route::put('delete-employe', [apiController::class, 'DeleteEmploye']);
     Route::post('create-user', [apiController::class, 'CreateUser']);
     Route::get('user-profile', [apiController::class, 'UserProfile']);
     Route::get('row-text-right', [apiController::class, 'RowTextRight']);
@@ -37,5 +40,7 @@ Route::group([
     Route::get('top-nav-bar', [apiController::class, 'TopNavBar']);
     Route::get('user', [apiController::class, 'user']);
     Route::get('testreq', [apiController::class, 'testreq']);
+    Route::get('holidays', [apiController::class, 'AppHolidays']);
+   
 
 });

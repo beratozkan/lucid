@@ -34,7 +34,6 @@ Route::get('/', function () {
 Route::get("/index",[UserActions::class,"render"]);
 
 Route::get("/index2",function(){
-
     return view("test-websocket");
 });
 Route::get('/page-register',function(){
@@ -47,12 +46,14 @@ Route::get("/loginpage",function(){
 Route::get("/loginpage2",function(){
     return view("login2");
 });
-Route::get("/user-profile",[UserActions::class,"UserProfile"])->middleware("AuthCheck");
+Route::get("/user-profile",[UserActions::class,"UserProfile"]);
 Route::post('register',[UserActions::class,"RegisterToApp"]);
 Route::post("update-general");
 Route::post("/login",[UserActions::class,"LoginToApp"]);
 
 Route::get("client-add",[UserActions::class,"ClientAdd"]);
+Route::get("app-holidays",[UserActions::class,"AppHolidays"]);
+
 Route::post("pusher/auth",[UserActions::class,"pusherAuth"]);
 Route::post("change-password",[UserActions::class,"PasswordResetUser"]);
 Route::post("/password-reset-mail",[UserActions::class,"PasswordResetMail"]);
@@ -60,7 +61,11 @@ Route::get("page-forgot-password",[UserActions::class,"PasswordReset"]);
 Route::get("/emp-departments",[UserActions::class,"EmpDepartments"]);
 Route::get("/app-chat",[UserActions::class,"UserChat"])->middleware("AuthCheck");
 Route::get('/employe-all', [EmployeController::class,"index"]);
-Route::get('/employe-leave', [EmployeController::class,"index"]);
+
+Route::get('/emp-leave', function(){
+
+    return view("employe-leave");
+});
 //Route::post("/employe-add",[EmployeController::class,"AddNewEmploye"]);
 //Route::get("/employe-delete/{id}",[EmployeController::class,"deleteEmploye"]);
 //Route::get("/employe-delete",[ShowEmployes::class,"deleteEmploye"]);

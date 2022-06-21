@@ -8,6 +8,8 @@ use Illuminate\Http\Response;
 use App\Models\NavBarBlockHeader;
 use App\Models\userNotification;
 
+use Illuminate\Support\Facades\DB;
+
 use Auth;
 use App\Models\employes;
 use App\Models\User;
@@ -39,6 +41,22 @@ class apiController extends Controller
             'token_type' => 'bearer',
         ],200);
     }
+    public function UserProfile(){
+        $userinfo = UserInformation::where("userId",auth()->user()["id"])->first();
+        return response()->json($userinfo);
+    }
+    public function RowTextRight(){
+        $userinfo = NavBarBlockHeader::where("userId",auth()->user()["id"])->first();
+        return response()->json($userinfo);
+    }  
+    public function LeftSideBar(){
+        $side_bar_info = UserInformation::where("userId",auth()->user()["id"])->first();
+        return response()->json($side_bar_info);
+    }
+    public function TopNavBar(){
+        $notification = userNotification::where("userId",auth()->user()["id"])->take(5)->get();
+        return response()->json($notification);
+    }
     public function employes(){
         $employe = employes::where("boss",auth()->user()["id"]);
         if($page = request()["page"]) {
@@ -59,6 +77,7 @@ class apiController extends Controller
     public function user(){
         return response()->json(auth()->user());
     }
+    
     public function AddEmploye(){
         $params = request(['name', 'email','phoneNumber',"gender","role"]);
         $params["boss"] = auth()->user()["id"];
@@ -67,6 +86,7 @@ class apiController extends Controller
         if(!$params){
              return response()->json("hata",404);
         }
+
         $user = UserInformation::where("userId",auth()->user()["id"])->first();
         $user->employe_count +=1;
         $user->save();
@@ -76,37 +96,38 @@ class apiController extends Controller
         $employe = employes::where("boss",auth()->user()["id"])->where("id",request("id"))->first();
         if($employe->update(request()->all())){
             $employe->save();
-            return response()->json([$employe,200]);
+            return response()->json([$employe],200);
         };
-        
-        return false;
-    }
+        return false;}
     public function DeleteEmploye(){
         $employe = employes::where("boss",auth()->user()["id"])->where("id",request("id"))->first();
         if($employe->delete()){
-            UserInformation::where("userId",auth()->user()["id"])->first();
-            return response()->json("kullanıcı başarılyla silindi",200);
+            $user = UserInformation::where("userId",auth()->user()["id"])->first();
+            if($user->employe_count>1){
+                $user->employe_count -= -1;
+                $user->save();    }
+                 return response()->json("kullanıcı başarılyla silindi",200);
         }
-        return response()->json("hata");
+        return response()->json("hata",404);
     }
-    public function testreq(){
+    public function AppHolidays(){
+        $holidays = DB::table('holidays')->get();
+        return response()->json($holidays);
+ }
+    public function AddLeaveRequsts(){
+        $query =DB::table("employe_leave_requests")->insert(["bossId"=>auth()->user()["id"],"EmployeId"=>request("employeId"),
+        "reason"=>request("reason"),"Date"=>"test"
+    ]);
+        if($query){
+            return response()->json("success");}
+    }
+   public function GetLeaveRequests(){
+   $users = DB::table('employe_leave_requests')->join('employes', 'employe_leave_requests.EmployeId',
+    '=', 'employes.id')->where("bossId",auth()->user()["id"])->select("name","employes.id","reason","date")->get();
+    return response()->json($users);
+   }
+   public function AddDepartmant(){
         
-    }
-    public function UserProfile(){
-        $userinfo = UserInformation::where("userId",auth()->user()["id"])->first();
-        return response()->json([$userinfo]);
-    }
-    public function RowTextRight(){
-        $userinfo = NavBarBlockHeader::where("userId",auth()->user()["id"])->first();
-        return response()->json($userinfo);
-    }  
-    public function LeftSideBar(){
-        $side_bar_info = UserInformation::where("userId",auth()->user()["id"])->first();
-        return response()->json($side_bar_info);
-    }
-    public function TopNavBar(){
-        $notification = userNotification::where("userId",auth()->user()["id"])->take(5)->get();
-        return response()->json($notification);
-    }
+   }
    
 }

@@ -45,8 +45,8 @@
             <div class="tab-pane animated fadeIn active" id="hr_menu">
                 <nav class="sidebar-nav">
                     <ul class="main-menu metismenu">
-                        <li class="active"><a href="index.html"><i class="icon-speedometer"></i><span>HR Dashboard</span></a></li>
-                        <li><a href="app-holidays.html"><i class="icon-list"></i>Holidays</a></li>
+                        <li class="active"><a href="index"><i class="icon-speedometer"></i><span>HR Dashboard</span></a></li>
+                        <li><a href="app-holidays"><i class="icon-list"></i>Holidays</a></li>
                         <li><a href="app-events.html"><i class="icon-calendar"></i>Events</a></li>
                         <li><a href="app-activities.html"><i class="icon-badge"></i>Activities</a></li>
                         <li><a href="app-social.html"><i class="icon-globe"></i>HR Social</a></li>
@@ -54,7 +54,7 @@
                             <a href="Employees" class="has-arrow"><i class="icon-users"></i><span>Employees</span></a>
                             <ul>
                                 <li><a href="employe-all">All Employees</a></li>
-                                <li><a href="emp-leave.html">Leave Requests</a></li>
+                                <li><a href="emp-leave">Leave Requests</a></li>
                                 <li><a href="emp-attendance.html">Attendance</a></li>
                                 <li><a href="emp-departments">Departments</a></li>
                             </ul>

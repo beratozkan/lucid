@@ -7,6 +7,7 @@
     <div class="col-lg-4 col-md-12">
         <div class="card profile-header">
             <div class="body">
+               
                 <div class="profile-image"> <img src="../assets/images/user.png" class="rounded-circle" alt=""> </div>
                 <div>
                     <h4 class="m-b-0"><strong>{{$userinfo->name}}</strong></h4>

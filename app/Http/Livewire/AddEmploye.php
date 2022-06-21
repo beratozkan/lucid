@@ -24,9 +24,12 @@ class AddEmploye extends Component
        
         if($user->status() != 404){
             $this->emit("renderEmploye");
+            $this->dispatchBrowserEvent('alert', 
+            ['type' => 'success',  'message' => 'kullanıcı başarıyle eklendi']);
+}
         }
         
         
     }
     
-}
+

@@ -33,7 +33,7 @@ class UserActions extends Controller
      if($response->status() !=200){
       return false;
      }
-     return $response->body();
+     return $response->object();
 
   }
   public function HttpPost($path){
@@ -53,14 +53,15 @@ class UserActions extends Controller
   return redirect("index");
  
 }
+public function AppHolidays(){
+  $holidays = $this->HttpGet("holidays");
+  return view("app-holidays",["holidays"=>$holidays]);
+}
 
 public function UserProfile(){
         
-  /*$info = UserInformation::findOr(Auth::user()["id"],function(){
-    UserInformation::create(["userId"=>Auth::user()["id"],"name"=> Auth::user()["name"]]);
-
- });*/
-  $info = HttpGet("user");
+  
+  $info = $this->HttpGet("user-profile");
   
   return view("page-profile2",["userinfo"=>$info]);
 }
